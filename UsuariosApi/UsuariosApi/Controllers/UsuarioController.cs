@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UsuariosApi.Data.Dtos;
-using AutoMapper;
-using UsuariosApi.Models;
-using Microsoft.AspNetCore.Identity;
 using UsuariosApi.Service;
 
 namespace UsuariosApi.Controllers
@@ -28,9 +25,10 @@ namespace UsuariosApi.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(LoginUsuarioDto dto)
         {
-            await _usuarioService.LoginAsync(dto);
+            var res = await _usuarioService.LoginAsync(dto);
+            
+            return Ok(res );
 
-            return Ok("Usuario Autenticado!");
         }
 
     }
