@@ -41,6 +41,19 @@ namespace Alura.Estacionamento.Teste
             Assert.Equal(-150, veiculo.VelocidadeAtual);
         }
 
+        [Fact]
+        public void TestaNomeProprietarioComMenosDeTresLetras()
+        {
+            //Arrange
+            string nomeProprietario = "er";
+
+            //Assert
+            Assert.Throws<System.FormatException>(
+                //Act
+                () => new Veiculo(nomeProprietario)
+                );
+        }
+
         public void Dispose()
         {
             SaidaConsoleTeste.WriteLine("Construtor invocado");

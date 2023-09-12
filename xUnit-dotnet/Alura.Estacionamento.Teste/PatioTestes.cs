@@ -18,7 +18,7 @@ namespace Alura.Estacionamento.Teste
             veiculo = new Veiculo();
         }
 
-        [Fact(DisplayName = "Nome personalizado")]
+        [Fact(DisplayName = "Assim se coloca um nome personalizado")]
         public void ValidaFaturamentoPatioUmVeiculo()
         {
             //Arrange
