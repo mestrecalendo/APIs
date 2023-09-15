@@ -12,60 +12,62 @@ using Xunit.Abstractions;
 
 namespace Alura.ByteBank.Infraestrutura.Testes
 {
-    public class ClienteRepositorioTestes
+    public class AgenciaRepositorioTestes
     {
+        private readonly IAgenciaRepositorio _repositorio;
         public ITestOutputHelper SaidaConsoleTeste;
-        private readonly IClienteRepositorio _repositorio;
-        public ClienteRepositorioTestes(ITestOutputHelper _saidaConsoleTeste)
+
+        public AgenciaRepositorioTestes(ITestOutputHelper _saidaConsoleTeste)
         {
             SaidaConsoleTeste = _saidaConsoleTeste;
             SaidaConsoleTeste.WriteLine("Construtor invocado.");
             //Injetando dependências no construtor;
             var servico = new ServiceCollection();
-            servico.AddTransient<IClienteRepositorio, ClienteRepositorio>();
-
+            servico.AddTransient<IAgenciaRepositorio, AgenciaRepositorio>();
             var provedor = servico.BuildServiceProvider();
-            _repositorio = provedor.GetService<IClienteRepositorio>();
+            _repositorio = provedor.GetService<IAgenciaRepositorio>();
 
         }
 
         [Fact]
-        public void TestaObterTodos()
+        public void TestaObterTodasAgenciasRepositorio()
         {
-            //Arrange
-            //var _repositorio = new ClienteRepositorio();
+            //Arrange         
 
             //Act
-            List<Cliente> lista = _repositorio.ObterTodos();
+            List<Agencia> lista = _repositorio.ObterTodos();
 
             //Assert
             Assert.NotNull(lista);
         }
 
         [Fact]
-        public void TestaObterClientePorId()
+        public void TestaObterAgenciaPorIdRepositorio()
         {
             //Arrange
+
             //Act
-            var cliente = _repositorio.ObterPorId(1);
+            var agencia = _repositorio.ObterPorId(1);
 
             //Assert
-            Assert.NotNull(cliente);
-            
+            Assert.NotNull(agencia);
+
         }
 
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
-        public void TestaObterClientePorVariosId(int id)
+        public void TestaObterAgenciasPorVariosIdRepositorio(int id)
         {
-            //Arrange
+            //Arrange       
+
             //Act
-            var cliente = _repositorio.ObterPorId(id);
+            var agencia = _repositorio.ObterPorId(id);
 
             //Assert
-            Assert.NotNull(cliente);
+            Assert.NotNull(agencia);
 
         }
+
     }
 }

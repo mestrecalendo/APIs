@@ -12,60 +12,57 @@ using Xunit.Abstractions;
 
 namespace Alura.ByteBank.Infraestrutura.Testes
 {
-    public class ClienteRepositorioTestes
+    public class ContaCorrenteRepositorioTestes
     {
         public ITestOutputHelper SaidaConsoleTeste;
-        private readonly IClienteRepositorio _repositorio;
-        public ClienteRepositorioTestes(ITestOutputHelper _saidaConsoleTeste)
+        private readonly IContaCorrenteRepositorio _repositorio;
+
+        public ContaCorrenteRepositorioTestes(ITestOutputHelper _saidaConsoleTeste)
         {
             SaidaConsoleTeste = _saidaConsoleTeste;
             SaidaConsoleTeste.WriteLine("Construtor invocado.");
+
             //Injetando dependências no construtor;
             var servico = new ServiceCollection();
-            servico.AddTransient<IClienteRepositorio, ClienteRepositorio>();
+            servico.AddTransient<IContaCorrenteRepositorio, ContaCorrenteRepositorio>();
 
             var provedor = servico.BuildServiceProvider();
-            _repositorio = provedor.GetService<IClienteRepositorio>();
+            _repositorio = provedor.GetService<IContaCorrenteRepositorio>();
 
         }
-
         [Fact]
-        public void TestaObterTodos()
+        public void TestaObterTodasContasCorrentes()
         {
             //Arrange
-            //var _repositorio = new ClienteRepositorio();
-
             //Act
-            List<Cliente> lista = _repositorio.ObterTodos();
+            List<ContaCorrente> lista = _repositorio.ObterTodos();
 
             //Assert
             Assert.NotNull(lista);
         }
 
         [Fact]
-        public void TestaObterClientePorId()
+        public void TestaObterContaCorrentePorId()
         {
             //Arrange
             //Act
-            var cliente = _repositorio.ObterPorId(1);
+            var conta = _repositorio.ObterPorId(1);
 
             //Assert
-            Assert.NotNull(cliente);
-            
+            Assert.NotNull(conta);
         }
 
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
-        public void TestaObterClientePorVariosId(int id)
+        public void TestaObterContasCorrentesPorVariosId(int id)
         {
             //Arrange
             //Act
-            var cliente = _repositorio.ObterPorId(id);
+            var conta = _repositorio.ObterPorId(id);
 
             //Assert
-            Assert.NotNull(cliente);
-
+            Assert.NotNull(conta);
         }
     }
 }
