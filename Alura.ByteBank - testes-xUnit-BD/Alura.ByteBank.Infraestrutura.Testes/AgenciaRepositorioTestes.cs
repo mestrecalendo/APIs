@@ -1,6 +1,7 @@
 ﻿using Alura.ByteBank.Dados.Repositorio;
 using Alura.ByteBank.Dominio.Entidades;
 using Alura.ByteBank.Dominio.Interfaces.Repositorios;
+using Alura.ByteBank.Infraestrutura.Testes.Servico;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,28 @@ namespace Alura.ByteBank.Infraestrutura.Testes
             //Assert
             Assert.NotNull(agencia);
 
+        }
+
+        [Fact]
+        public void TestaAdicionarAgenciaMock()
+        {
+            // Arrange
+            var agencia = new Agencia()
+            {
+                Nome = "Agência Amaral",
+                Identificador = Guid.NewGuid(),
+                Id = 4,
+                Endereco = "Rua Arthur Costa",
+                Numero = 6497
+            };
+
+            var repositorioMock = new ByteBankRepositorio();
+
+            //Act
+            var adicionar = repositorioMock.AdicionarAgencia(agencia);
+
+            //Arrange
+            Assert.True(adicionar);
         }
 
     }
